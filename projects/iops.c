@@ -8,7 +8,7 @@
 void write_func(char *wfilename, int wopen_file, char *wcontent);
 void read_func(char *wfilename, int  wopen_file, char *wcontent);
 int main(){
-
+	// allocates requested memory and returns pointer. calloc sets allocated memory to zero
 	char *content = (char *) calloc(100, sizeof(char));
 	int  file_descriptor;
 	int open_file;
@@ -34,6 +34,7 @@ int main(){
 
 	write_func(open_filename, open_file, content);
 	read_func(open_filename, open_file, content);
+	free(content);
 
 	return 0;
 }
@@ -58,7 +59,7 @@ void write_func(char *wfilename, int wopen_file, char *wcontent){
 void read_func(char *wfilename, int  wopen_file, char *wcontent ){
 	printf("Reading file..");
 
-
+	// reading wcontent of size 100, and setting 99 to the null byte, which tells us to stop at the 99th index
 	int size = read(wopen_file, wcontent, 100);
 	wcontent[99] = '\0';
 	printf("File content is: %s\n" , wcontent);
